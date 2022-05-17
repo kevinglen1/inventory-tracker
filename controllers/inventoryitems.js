@@ -7,20 +7,21 @@ module.exports = {
 };
 
 function newInventoryItem(req, res) {
-    res.render('new');
+    Inventory.find({}, function(err, inventories) {
+        res.render('new', { inventories });
+      });
 }
 
 function create(req, res) {
-    console.log(req.body);
     Inventory.create(req.body);
-    console.log(req.body.itemName);
+    console.log('req.body ----',req.body.itemName);
     console.log('Inventory ->', Inventory);
-    console.log(Inventory.find());
     res.redirect('new');
 }
 
 function delItem(req, res) {
     let inventory = req.body;
+    console.log(req.body);
     inventory.deleteOne({ itemName: item }, function (err) {
         if (err) return handleError(err);
         // deleted at most one tank document
