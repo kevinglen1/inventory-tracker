@@ -15,11 +15,11 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title"><%= inventories[item]['itemName'] %></span>
-          <p><%= inventories[item] %></p>
+          <p><%= inventories[item]['_id'] %></p>
         </div>
         <div class="card-action">
           <form
-            action="/cards/<%=  %>"
+            action="/inventoryItems/<%= inventories[item]['_id']  %>"
             method="GET"
             class="secondary-content"
           >
@@ -27,7 +27,7 @@
           </form>
 
           <form
-            action="/cards/<%=  %>?_method=DELETE"
+            action="/inventoryItems/<%= inventories[item]['_id']  %>?_method=DELETE"
             method="POST"
             class="secondary-content"
           >
