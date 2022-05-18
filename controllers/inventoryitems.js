@@ -28,21 +28,17 @@ function delItem(req, res) {
       res.redirect('new');
 }
 
-function editItem(req, res) {
+async function editItem(req, res) {
     let filter = { _id: req.params.id};
-    let update = { _id: req.params.itemName};
-
-    Inventory.findOneAndUpdate(filter, update, {
+    let update = { itemName: req.body.itemName};
+    await Inventory.findOneAndUpdate(filter, update, {
         returnOriginal: false
     })
+    res.redirect("new")
 }
 
 function renderEditPage(req, res) {
     Inventory.findById(req.params.id, function (err, item) {
         res.render('edit', { item })
     })
-
-    // console.log('req.inventories =',req.inventories);
-    // console.log('req.params.id =',req.params.id);
-    // res.render('edit', { item: req.inventories(req.params.id)})
 }

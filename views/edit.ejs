@@ -3,7 +3,7 @@
 
 <form id="edit-form" action="/inventoryItems/<%= item._id%>?_method=PUT" method="POST">
     <div class="input-field col s6">
-      <input id="input_text" type="text" name="sceneType" placeholder="<%= item.itemName %>" data-length="40">
+      <input id="input_text" type="text" name="itemName" placeholder="<%= item.itemName %>" data-length="40">
       <label for="input_text">Scene Type:</label>
     </div>
       <div class="input-field col s6">
