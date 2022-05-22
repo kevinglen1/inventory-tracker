@@ -9,6 +9,7 @@ require('./config/database');
 
 var indexRouter = require('./routes/index');
 var inventoryItemsRouter = require('./routes/inventoryitems');
+var shipmentsRouter = require('./routes/shipments')
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(methodOverride('_method'));
 
 app.use('/', indexRouter);
 app.use('/inventoryitems', inventoryItemsRouter);
+app.use('/shipments', shipmentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

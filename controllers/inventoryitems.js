@@ -1,4 +1,5 @@
 const Inventory = require("../models/inventory")
+const Shipment = require("../models/shipment")
 
 module.exports = {
     new: newInventoryItem,
@@ -6,26 +7,28 @@ module.exports = {
     delItem,
     renderEditPage,
     editItem,
+    addToShipment,
 };
 
 function newInventoryItem(req, res) {
-    Inventory.find({}, function(err, inventories) {
-        res.render('new', { inventories });
-      });
+    let shipments = Shipment.find({}, function(err, shipments) {
+        Inventory.find({}, function(err, inventories) {
+            res.render('inventoryItems', { inventories, shipments });
+        });
+})
 }
+
 
 function create(req, res) {
     Inventory.create(req.body);
-    console.log('req.body ----',req.body.itemName);
-    console.log('Inventory ->', Inventory);
-    res.redirect('new');
+    res.redirect('/inventoryItems');
 }
 
 function delItem(req, res) {
     Inventory.deleteOne({ _id: req.params.id }, function (err) {
         if (err) return handleError(err);
       });
-      res.redirect('new');
+      res.redirect('/inventoryItems');
 }
 
 async function editItem(req, res) {
@@ -34,7 +37,19 @@ async function editItem(req, res) {
     await Inventory.findOneAndUpdate(filter, update, {
         returnOriginal: false
     })
-    res.redirect("new")
+    res.redirect("/inventoryItems")
+}
+
+async function addToShipment(req, res) {
+    let filter = { customer: req.body.shipmentSelector};
+    console.log('filter', filter)
+    
+    let update = { items: req.params.id};
+    console.log('update', update)
+    await Shipment.findOneAndUpdate(filter, update, {
+        returnOriginal: false
+    })
+    res.redirect("/inventoryItems")
 }
 
 function renderEditPage(req, res) {

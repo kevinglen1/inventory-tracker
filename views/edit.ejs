@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+  <h1>Edit Item</h1>
+  <form
+    id="edit-form"
+    action="/inventoryItems/<%= item._id %>?_method=PUT"
+    method="POST"
+  >
+    <div id="itemName">
+      <label for="input_text">Item Name:</label>
+      <input
+        id="input_text"
+        type="text"
+        name="itemName"
+        placeholder="<%= item.itemName %>"
+        data-length="40"
+      />
+    </div>
+    <div id="itemName">
+      <p>Item ID: <%= item._id%></p>
+    </div>
 
-<form id="edit-form" action="/inventoryItems/<%= item._id%>?_method=PUT" method="POST">
-    <div class="input-field col s6">
-      <input id="input_text" type="text" name="itemName" placeholder="<%= item.itemName %>" data-length="40">
-      <label for="input_text">Scene Type:</label>
-    </div>
-      <div class="input-field col s6">
-      <label>Position:</label>
-      <input type="number" name="position" placeholder="<%= %>">
-    </div>
-    
-    <div class="input-field col s12">
-      <select id="starting-value" name="startingValue" placeholder="<%= %>">
-        <option value="positive">Positive</option>
-        <option value="negative">Negative</option>
-      </select>
-      <label for="starting-value">Starting Value:</label>
-    </div>
-      <div class="input-field col s12">
-        <select id="ending-value" name="endingValue">
-          <option value="positive">Positive</option>
-          <option value="negative">Negative</option>
-        </select>
-        <label for="ending-value">Ending Value:</label>
-      </div>
-    <div class="input-field col s12">
-      <textarea type="text" name="description" placeholder="<%= %>" id="textarea1" class="materialize-textarea"></textarea>
-      <label for="textarea1">Description:</label>
-    </div>
     <button type="submit">Submit</button>
   </form>
-
-  </html>
+</html>

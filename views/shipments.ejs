@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Shipments</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+      </head>
+    <a href="./inventoryItems">Go to Inventory View and Creation Page</a>
+  <h2>Enter a New Shipment</h2>
+  <form action="/shipments" method="POST">
+    <label
+      >Customer Name:
+      <input type="text" name="customer" /> </label
+    ><br />
+    <input type="submit" value="Add Shipment" />
+  </form>
+
+  <h2>Shipments:</h2>
+  <% for (const shipment in shipments) { %>
+  <div class="shipment-card">
+    
+          <span>Shipment ID: <%= shipments[shipment]['_id'] %></span>
+          <p>Customer Name: <%= shipments[shipment]['customer'] %></p>
+          
+          <form
+            action="/shipments/<%= shipments[shipment]['_id']  %>"
+            method="GET"
+            class="secondary-content"
+          >
+            <button type="submit" >Edit</button>
+          </form>
+
+          <form
+            action="/shipments/<%= shipments[shipment]['_id']  %>?_method=DELETE"
+            method="POST"
+            class="secondary-content"
+          >
+            <button type="submit">Delete</button>
+          </form>
+
+      
+  </div>
+  <% } %>
+</html>

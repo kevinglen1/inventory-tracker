@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Inventory</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <a href="./shipments">Go to Shipments Page</a>
+  <body>
+    <h2>Enter a New Inventory Item</h2>
+    <form action="/inventoryitems" method="POST">
+      <label
+        >Item Name:
+        <input type="text" name="itemName" /> </label
+      ><br />
+      <input type="submit" value="Add Item" />
+    </form>
+
+    <h2>Items in Inventory:</h2>
+    <% for (const item in inventories) { %>
+      <div class="inventory-card">
+      
+        <span>Item Name: <%= inventories[item]['itemName'] %></span>
+        <p>Item ID: <%= inventories[item]['_id'] %></p>
+
+
+
+        <form
+          action="/inventoryitems/addtoshipment/<%= inventories[item]['_id']  %>?_method=PUT"
+          method="POST"
+          class="secondary-content"
+        >
+        <label for="cars">Choose a car:</label>
+
+        <select name="shipmentSelector">
+          <% for (const shipment in shipments) { %>
+          <option value=<%= shipments[shipment]['customer'] %>> <%= shipments[shipment]['customer'] %> </option>
+          <% } %>
+        </select>
+          <button type="submit">Add to Shipment</button>
+        </form>
+        
+        <form
+          action="/inventoryItems/<%= inventories[item]['_id']  %>"
+          method="GET"
+          class="secondary-content"
+        >
+          <button type="submit" >Edit</button>
+        </form>
+
+        <form
+          action="/inventoryItems/<%= inventories[item]['_id']  %>?_method=DELETE"
+          method="POST"
+          class="secondary-content"
+        >
+          <button type="submit">Delete</button>
+        </form>
+
+        
+      </div>
+    <% } %>
+  </body>
+</html>

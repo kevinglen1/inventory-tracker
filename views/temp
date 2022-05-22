@@ -1,0 +1,14 @@
+<h2>Items in Inventory:</h2>
+    <% for (const item in inventories) { %>
+      <div class="inventory-card">
+      
+        <span>Item Name: <%= inventories[item]['itemName'] %></span>
+        <p>Item ID: <%= inventories[item]['_id'] %></p>
+
+        <label for="cars">Choose a car:</label>
+
+        <select name="shipmentsSelector">
+          <% for (const shipment in shipments) { %>
+          <option value=<% shipments[shipment]['customer'] %>><%= shipments[shipment]['customer'] %></option>
+          <% } %>
+        </select>

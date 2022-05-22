@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <h1>Edit Shipment</h1>
+  <form
+    id="edit-form"
+    action="/shipments/<%= shipments._id %>?_method=PUT"
+    method="POST"
+  >
+    <div id="customer">
+      <label for="input_text">Customer Name:</label>
+      <input
+        id="input_text"
+        type="text"
+        name="customer"
+        placeholder="<%= shipments.customer %>"
+        data-length="40"
+      />
+    </div>
+
+    <div id="shipmentName">
+      <p>Shipment ID: <%= shipments._id%></p>
+    </div>
+
+    <% for (const item of shipments['items']) { %>
+      <% console.log(item) %>
+
+      <div id="shipmentItems">
+        <p>Item Name: <%= item.itemName %></p>
+      </div>
+    <% } %>
+
+    <button type="submit">Submit</button>
+  </form>
+
+
+</html>
