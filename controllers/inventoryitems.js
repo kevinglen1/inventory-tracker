@@ -41,15 +41,13 @@ async function editItem(req, res) {
 }
 
 async function addToShipment(req, res) {
-    let filter = { customer: req.body.shipmentSelector};
-    console.log('filter', filter)
-    
-    let update = { items: req.params.id};
-    console.log('update', update)
-    await Shipment.findOneAndUpdate(filter, update, {
-        returnOriginal: false
+    Shipment.find({customer: req.body.shipmentSelector}, function(err, shipments) {
+        let shipment = shipments[0]
+        shipment.items.push(req.params.id)
+        shipment.save(function(err) {
+            res.redirect("/inventoryItems")
+        })
     })
-    res.redirect("/inventoryItems")
 }
 
 function renderEditPage(req, res) {

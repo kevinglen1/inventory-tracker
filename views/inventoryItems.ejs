@@ -22,14 +22,12 @@
         <span>Item Name: <%= inventories[item]['itemName'] %></span>
         <p>Item ID: <%= inventories[item]['_id'] %></p>
 
-
-
         <form
           action="/inventoryitems/addtoshipment/<%= inventories[item]['_id']  %>?_method=PUT"
           method="POST"
           class="secondary-content"
         >
-        <label for="cars">Choose a car:</label>
+        <label for="shipmanSelector">Select a Shipment:</label>
 
         <select name="shipmentSelector">
           <% for (const shipment in shipments) { %>
@@ -54,8 +52,6 @@
         >
           <button type="submit">Delete</button>
         </form>
-
-        
       </div>
     <% } %>
   </body>

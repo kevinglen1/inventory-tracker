@@ -7,6 +7,7 @@ module.exports = {
     delShipment,
     show,
     update,
+    // removeFromShipment
 };
 
 function index(req, res) {
@@ -17,8 +18,6 @@ function index(req, res) {
 
 function create(req, res) {
     Shipment.create(req.body);
-    console.log('req.body ----',req.body.customer);
-    console.log('Shipment ->', Shipment);
     res.redirect('/shipments');
 }
 
@@ -31,20 +30,25 @@ function delShipment(req, res) {
 
 async function update(req, res) {
     let filter = { _id: req.params.id};
-    console.log('filter', filter)
-    let update = { itemName: req.body.itemName};
-    await Inventory.findOneAndUpdate(filter, update, {
+    let update = { customer: req.body.customer};
+    await Shipment.findOneAndUpdate(filter, update, {
         returnOriginal: false
     })
     res.redirect("/shipments")
 }
 
 function show(req, res) {
-    // Shipment.find({}).populate({ path: "items", model: "Inventory" })
     Shipment.findById(req.params.id).populate('items').exec(function (err, shipments) {
-        
-        console.log(shipments)
-        console.log(shipments.customer)
         res.render('editShipment', { shipments })
     })
 }
+
+// async function removeFromShipment(req, res) {
+//     Shipment.find({customer: req.body.shipmentSelector}, function(err, shipments) {
+//         let shipment = shipments[0]
+//         shipment.items.push(req.params.id)
+//         shipment.save(function(err) {
+//             res.redirect(`/shipments/${shipment.id}`)
+//         })
+//     })
+// }
