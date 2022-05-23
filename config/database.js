@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/inventory-tracker');
+mongoose.connect('mongodb://127.0.0.1/inventory-tracker');
 
 // shortcut to mongoose.connection object
 const db = mongoose.connection;
