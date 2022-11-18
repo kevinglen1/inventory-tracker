@@ -11,7 +11,18 @@ module.exports = {
 };
 
 function index(req, res) {
-    Shipment.find({}, function(err, shipments) {
+    // Shipment.find({}, function(err, shipments) {
+    //     shipments.populate('items')
+    //     console.log('shipments =',shipments)
+    //     res.render('shipments', { shipments });
+    //   });
+    Shipment.
+    find({}).
+    populate('items').
+    exec(function(err, shipments) {
+        if (err) return handleError(err);
+        console.log('shipments =',shipments[0])
+        // console.log('shipments.items =',shipments.items)
         res.render('shipments', { shipments });
       });
 }

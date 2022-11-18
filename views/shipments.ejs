@@ -35,6 +35,13 @@
       </form>
     </div>
 
+    <h3>Inventory Items in Shipment:</h3>
+    <% for (const item of shipments) { %>
+
+    <div id="shipmentItems">
+      <p>Item Name: <%= shipments[0]['items'] %></p>
+    </div>
+    <% } %>
     <% } %>
   </body>
 </html>
